@@ -669,6 +669,16 @@ class Adminer {
 	function editRowPrint($table, $fields, $row, $update) {
 	}
 
+	/** Print before show form
+	* @param string
+	* @param array
+	* @param mixed
+	* @param bool
+	* @return null
+	*/
+	function showRowPrint($table, $fields, $row) {
+	}
+
 	/** Functions displayed in edit form
 	* @param array single field from fields()
 	* @return array

@@ -274,4 +274,5 @@ $translations = array(
 	'yes' => 'はい',
 	'no' => 'いいえ',
 	'Default value' => '既定値',
+	'Show' => '参照',
 );

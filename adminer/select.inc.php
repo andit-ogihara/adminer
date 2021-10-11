@@ -386,7 +386,7 @@ if (!$columns && support("table")) {
 				}
 				echo "<tr" . odd() . ">" . (!$group && $select ? "" : "<td>"
 					. checkbox("check[]", substr($unique_idf, 1), in_array(substr($unique_idf, 1), (array) $_POST["check"]))
-					. ($is_group || information_schema(DB) ? "" : " <a href='" . h(ME . "edit=" . urlencode($TABLE) . $unique_idf) . "' class='edit'>" . lang('edit') . "</a>")
+					. ($is_group || information_schema(DB) ? "" : " <a href='" . h(ME . "edit=" . urlencode($TABLE) . $unique_idf) . "' class='edit'>" . lang('edit') . "</a>" . " <a href='" . h(ME . "show=" . urlencode($TABLE) . $unique_idf) . "' class='show'>" . lang('Show') . "</a>")
 				);
 
 				foreach ($row as $key => $val) {

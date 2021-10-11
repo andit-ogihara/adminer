@@ -1509,3 +1509,47 @@ function edit_form($table, $fields, $row, $update) {
 </form>
 <?php
 }
+
+function show_form($table, $fields, $row) {
+    global $adminer, $token, $driver, $error;
+    $table_name = $adminer->tableName(table_status1($table, true));
+    $adminer->showRowPrint($table, $fields, $row);
+    page_header(
+        lang('Show'),
+        $error,
+        array("select" => array($table, $table_name)),
+        $table_name
+    );
+
+    if ($row === false) {
+        echo "<p class='error'>" . lang('No rows.') . "\n";
+    }
+
+    echo "<table cellspacing='0' class='layout'>";
+
+    foreach ($row as $key => $val) {
+        $field = $fields[$key];
+        if ($driver) {
+            $val = $driver->value($val, $field);
+        }
+        $val = select_value($val, null, $field, null);
+        echo "<tr><th>$key</th><td>$val</td></tr>";
+    }
+    echo "</table>";
+
+    $checks = array();
+    foreach (explode('&', $_SERVER['QUERY_STRING']) as $query) {
+        if (preg_match('/^where%5B.+%5D=/', $query)) {
+            $checks[] = $query;
+        }
+    }
+?>
+<p>
+  <form action="<?php echo $_SERVER["HTTP_REFERER"] ?>" method="post">
+    <input type="hidden" name="token" value="<?php echo get_token(); ?>">
+    <input type="hidden" name="check[]" value="<?php echo implode('&', $checks); ?>">
+    <input type="submit" name="clone" value="<?php echo lang('Clone'); ?>">
+  </form>
+</p>
+<?php
+}
